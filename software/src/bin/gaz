@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# -----------------------------------------------------------------------------
+# Description:
+# -----------------------------------------------------------------------------
+# Startet die Zeitmessung Grossnazeige Software
+# -----------------------------------------------------------------------------
+
+# resolve links - $0 may be a softlink
+PRG="$0"
+
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '.*/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`/"$link"
+  fi
+done
+
+
+PRGDIR=`dirname "$PRG"`
+
+RUN_CONF="$PRGDIR"/"gaz.config"
+
+if [ ! -r "$RUN_CONF" ]; then
+  echo "Kann Datei $RUN_CONF nicht finden!"
+  echo "Diese Datei is nötig um die Zeitmessung Grossanzeige zu starten"
+  exit 1
+fi
+
+. "$RUN_CONF"
+export JAVA_OPTS
+
+PRGDIR=`dirname "$PRG"`
+
+# change to parent dir
+cd "$PRGDIR/.."
+
+# set current directory as AxonIvyHome
+GazHome=`pwd`
+
+# Set standard commands for invoking Java.
+if [ -x "$GazHome/jre/bin/java" ]; then
+  JAVA="$GazHome/jre/bin/java"
+elif [ -x "$JAVA_HOME/bin/java" ]; then
+  JAVA="$JAVA_HOME/bin/java"
+else
+  JAVA=`which java`
+fi
+
+# Check Java binary exists
+if [ ! -x "$JAVA" ]; then
+  echo "Kann java program nicht finden. Bitte installieren Sie java und setzen es auf den PATH. Oder setzen Sie die Umgebungsvariable  JAVA_HOME"
+  exit 1
+fi
+
+MainJar="$GazHome"/lib/zm-gaz-0.0.1-SNAPSHOT.jar
+
+if [ "x$1" = 'xstartdaemon' ] || [ "x$1" = 'x-startdaemon' ]; then
+  nohup $JAVA -jar $MainJar $JAVA_OPTS $@ & echo $! > bin/gaz.pid
+else
+  exec $JAVA -jar $MainJar $JAVA_OPTS
+fi
