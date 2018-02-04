@@ -20,6 +20,16 @@
         <include>zm-gaz-*.jar</include>
       </includes>
     </fileSet>
+    <fileSet>
+      <directory>src/doc</directory>
+      <outputDirectory>.</outputDirectory>
+      <lineEnding>unix</lineEnding>
+      <fileMode>0444</fileMode>
+      <excludes>
+        <exclude>*.formatted</exclude>
+      </excludes>
+    </fileSet>
+    
   </fileSets>
   <dependencySets>
     <dependencySet>
