@@ -26,5 +26,9 @@ Die Software besteht aus einen Java Program, welches die [pi4j](http://pi4j.com/
 
 ![GAZ](images/gaz.jpg "GAZ")
 
+## Erbauer
+
+Die GAZ wurde vom Zeitmessteam des Turnverein Küssnacht (Georg Duss, Reto Weiss) erstellt. 
+
 
 
