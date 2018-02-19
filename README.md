@@ -12,8 +12,8 @@ MAX 7219 7-SEG Kontroller an.
 
 Die einzelnen 7-Segment Digits sind auf einzelnen Platinen aufgebaut. 
 Jeweils 5 einzelne LED bilden ein Segment. Die LED werden direkt über die externe 12 V Speisung angesteuert und über
-ein SN74LS00 Open Kollektor auf Ground gezogen um diese einzuschalten. 
-Ein SN74LS08 wird verwendet um die Digit und Segment Steuersignale miteinander zu verknüpfen.
+ein Inverter Buffer mit Open Kollektor (SN74LS06) auf Ground gezogen um diese einzuschalten. 
+Ein AND (SN74LS08) wird verwendet um die Digit und Segment Steuersignale miteinander zu verknüpfen.
 
 Ein DC/DC Wandler (TEM 3-1211N) wandelt die externe Speisung von 12 V auf 5 V. Dieses wird für das Raspberry PI und die Speisung der TTL Logik Bausteine verwendet.
 
