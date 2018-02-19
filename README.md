@@ -24,5 +24,7 @@ Die Software besteht aus einen Java Program, welches die [pi4j](http://pi4j.com/
 
 ## Bilder
 
+![GAZ](images/gaz.jpg "GAZ")
+
 
 
