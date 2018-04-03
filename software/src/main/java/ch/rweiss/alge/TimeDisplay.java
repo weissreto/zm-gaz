@@ -85,7 +85,7 @@ public class TimeDisplay
       sevenSegDisplay.display("ready ");
       return;
     }
-    if (time.getKind() == TimeKind.RUNNING)
+    if (time.getKind() == TimeKind.RUNNING || time.getKind() == TimeKind.WINNER)
     {
       String timeString = new TimeToStringConverter(time).toMinutesSecondsHundrethsString();
       sevenSegDisplay.display(timeString);
