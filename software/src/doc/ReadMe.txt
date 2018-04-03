@@ -1,6 +1,35 @@
 Zeitmessung Grossanzeige
 ========================
 
+Hardware Konfiguration Raspberry PI:
+------------------------------------
+
+Um die Serielle Schnittstelle für die Kommunikation mit den ALGE Timers 
+benutzen zu können muss man diese zuerst konfigurieren:
+
+1. Starte eine Konsole
+2. Starte das Kommando raspi-config
+
+  > raspi-config
+  
+3. Wähle die Option: 7 Advanced Options
+4. Wähle die Option: A8 Serial
+5. Wähle die Option: No
+6. Wähle die Option: Save
+7. Starte einen Editor um die Datei boot/config.txt zu bearbeiten:
+
+  > sudo nano /boot/config.txt
+  
+8. Editiere folgende Zeile:
+
+  enable_uart=0
+  
+um in :
+  
+  enable_uart=1
+  
+9. Speichere die Änderung mit CTRL-X, dann y für yes, dann Enter
+
 Installation:
 -------------
 
