@@ -1,7 +1,5 @@
 package ch.rweiss.alge.time;
 
-import java.util.Formatter;
-
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -73,137 +71,19 @@ public class Time
 		return kind;
 	}	
 	
-	public String toString()
+	@Override
+  public String toString()
 	{
 		return time;
 	}	
-
-	public String formatTime(TimePrecision precision)
-	{
-		precision = this.precision.lower(precision);
-		StringBuilder builder = new StringBuilder();
-		try (Formatter formatter = new Formatter(builder))
-		{
-			if (hours > 0)
-			{
-				formatter.format("%02d:%02d:%02d", hours, minutes, seconds);
-			}
-			else if (minutes > 0)
-			{
-				formatter.format("%02d:%02d", minutes, seconds);
-			}
-			else 
-			{
-				formatter.format("%02d", seconds);
-			}
-				
-			if (precision != TimePrecision.SECOND)
-			{
-				int milliDigits = precision.getMilliDigits();
-				formatter.format(".%0"+milliDigits+"d", getMilliSeconds(precision));
-			}
-		}
-		return builder.toString();
-	}
-
-	public String formatTimeFull(TimePrecision precision)
-	{
-		precision = this.precision.lower(precision);
-		StringBuilder builder = new StringBuilder();
-		try (Formatter formatter = new Formatter(builder))
-		{
-			formatter.format("%02d:%02d:%02d", hours, minutes, seconds);
-			if (precision != TimePrecision.SECOND)
-			{
-				int milliDigits = precision.getMilliDigits();
-				formatter.format(".%0"+milliDigits+"d", getMilliSeconds(precision));
-			}
-		}
-		return builder.toString();
-	}
-	
-	public String formatTimeFullWithoutDelimiters(TimePrecision precision)
-	{
-		StringBuilder builder = new StringBuilder();
-		try (Formatter formatter = new Formatter(builder))
-		{
-			boolean onlyBlanks = true;
-			if (hours == 0)
-			{
-				formatter.format("  ");
-			}	
-			else
-			{
-				formatter.format("%2d", hours);
-				onlyBlanks = false;
-			}
-			if (minutes == 0 && onlyBlanks)
-			{
-				formatter.format("  ");
-			}
-			else
-			{
-				if (onlyBlanks)
-				{
-					formatter.format("%2d", minutes);
-				}
-				else
-				{
-					formatter.format("%02d", minutes);
-				}
-				onlyBlanks = false;
-			}
-			if (onlyBlanks)
-			{
-				formatter.format("%2d", seconds);
-			}
-			else
-			{
-				formatter.format("%02d", seconds);
-			}
-			if (precision != TimePrecision.SECOND)
-			{				
-				int milliDigits = precision.getMilliDigits();
-				TimePrecision lowerPrecision = this.precision.lower(precision);
-				int availDigits = lowerPrecision.getMilliDigits();
-				if (availDigits != 0)
-				{
-					formatter.format("%0"+availDigits+"d", getMilliSeconds(lowerPrecision));
-				}
-				for (int blanks = 0; blanks < milliDigits-availDigits; blanks++)
-				{
-					formatter.format(" ");
-				}
-			}
-		}
-		return builder.toString();
-	}
 	
 	public static Time parse(String time)
 	{
 		return new Time(time);
 	}
 
-	private int getMilliSeconds(TimePrecision precision) 
-	{
-		if (precision == TimePrecision.SECOND)
-		{
-			return 0;			
-		}
-		if (precision == TimePrecision.TENTH)
-		{
-			return milliseconds/100;
-		}
-		if (precision == TimePrecision.HUNDREDTH)
-		{
-			return getHundredths();
-		}
-		return milliseconds;
-	}
-
 	private void parse() 
 	{
-		System.out.println("Time: "+time);
 		String timeString = time;
 		timeString = parseTimeKind(timeString);
 		timeString = parseHours(timeString);
@@ -214,9 +94,9 @@ public class Time
 
 	private String parseTimeKind(String timeString) 
 	{
-		kind = TimeKind.parse(timeString);
-		timeString = StringUtils.substring(timeString, 3);
-		System.out.println("Kind "+kind+" left "+timeString);
+	  String timeKind = StringUtils.substring(timeString, 0, 5);
+		kind = TimeKind.parse(timeKind);
+		timeString = StringUtils.substring(timeString, 5);
 		return timeString.trim();
 	}
 
@@ -231,7 +111,6 @@ public class Time
 		{
 			hours = 0;
 		}
-		System.out.println("Hours: "+hours+" left "+timeString);
 		return timeString;
 	}
 	
@@ -239,7 +118,6 @@ public class Time
 	{
 		minutes = parseInt(timeString, DELIMITER);
 		timeString = StringUtils.substringAfter(timeString,  DELIMITER);
-		System.out.println("Minutes: "+minutes+" left "+timeString);
 		return timeString;
 	}
 	
@@ -260,7 +138,6 @@ public class Time
 			seconds = Integer.parseInt(timeString);
 			timeString = "";
 		}
-		System.out.println("Seconds: "+seconds+" left "+timeString);
 		return timeString;
 	}
 	
@@ -287,16 +164,15 @@ public class Time
 		{
 			precision = TimePrecision.TAUSENDTH;
 		}
-		System.out.println("Millis: "+milliseconds);
 	}
 
-	private int parseInt(String str, String delimiter)
+	private static int parseInt(String str, String delimiter)
 	{
 		return Integer.parseInt(StringUtils.substringBefore(str,  delimiter));
 	}
 
 	public boolean isNull() 
 	{		
-		return hours==0 && minutes==0 && seconds == 0&& milliseconds == 0 && precision == TimePrecision.HUNDREDTH;
+		return hours==0 && minutes==0 && seconds == 0 && milliseconds == 0 && precision == TimePrecision.HUNDREDTH;
 	}
 }

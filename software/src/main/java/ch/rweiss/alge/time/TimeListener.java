@@ -1,6 +1,4 @@
-package ch.rweiss.alge;
-
-import ch.rweiss.alge.time.Time;
+package ch.rweiss.alge.time;
 
 public interface TimeListener 
 {

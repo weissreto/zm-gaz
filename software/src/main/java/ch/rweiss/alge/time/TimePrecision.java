@@ -4,28 +4,32 @@ public enum TimePrecision
 {
 	SECOND 
 	{
-		public int getMilliDigits()
+		@Override
+    public int getMilliDigits()
 		{
 			return 0;
 		}
 	},
 	TENTH
 	{
-		public int getMilliDigits()
+		@Override
+    public int getMilliDigits()
 		{
 			return 1;
 		}
 	},
 	HUNDREDTH
 	{
-		public int getMilliDigits()
+		@Override
+    public int getMilliDigits()
 		{
 			return 2;
 		}
 	},
 	TAUSENDTH
 	{
-		public int getMilliDigits()
+		@Override
+    public int getMilliDigits()
 		{
 			return 3;
 		}

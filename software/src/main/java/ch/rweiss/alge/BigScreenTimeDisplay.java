@@ -18,7 +18,9 @@ import javax.swing.SwingUtilities;
 
 import ch.rweiss.alge.time.Time;
 import ch.rweiss.alge.time.TimeKind;
+import ch.rweiss.alge.time.TimeListener;
 import ch.rweiss.alge.time.TimePrecision;
+import ch.rweiss.alge.time.TimeToStringConverter;
 
 public class BigScreenTimeDisplay implements TimeListener  
 {
@@ -100,7 +102,7 @@ public class BigScreenTimeDisplay implements TimeListener
 		System.out.println(time);
 		if (time.getKind() == TimeKind.RUNNING)
 		{
-			this.timeString = time.formatTime(TimePrecision.HUNDREDTH);
+			this.timeString = new TimeToStringConverter(time).toShortString(TimePrecision.HUNDREDTH);
 		}
 		else if (time.getKind() == TimeKind.FINSIH)			
 		{
@@ -108,7 +110,7 @@ public class BigScreenTimeDisplay implements TimeListener
 			{
 				this.finishTimeString += "\n";
 			}
-			this.finishTimeString += time.formatTime(TimePrecision.HUNDREDTH);
+			this.finishTimeString += new TimeToStringConverter(time).toShortString(TimePrecision.HUNDREDTH);
 		}
 		else if (time.getKind() == TimeKind.MASS_START ||
 				 time.getKind() == TimeKind.START)

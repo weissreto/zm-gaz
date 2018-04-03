@@ -17,6 +17,7 @@ public enum TimeKind
 	}
 	public static TimeKind parse(String time) 
 	{
+	  time = time.trim();
 		for (TimeKind kind : values())
 		{
 			if (kind.matches(time))
