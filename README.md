@@ -29,8 +29,8 @@ Die GAZ ist modular aufgebaut. Sie besteht aus:
 Die Steuer-Leiterplatten besteht aus einem Laborprint auf welchem ein Raspberry PI 2 Model B aufgeschraubt ist. Das Raspberry PI liest das RS-232 Signal über den PIN 10 (UART0 RXD) ein. Damit das RS-232 Signal vom Raspberry gelesen werden kann wird es zuerst durch eine Pegelanpassungsschaltung Schaltung auf der Steuer-Leiterplatte von +/- 24V auf 0 und 5V umgewandelt. Das Raspberry steuert die Anzeige über den 7-Segment Steuer-Baustein MAX 7219 an. Die Kommunikation zwischen Raspberry und MAX 7219 findet über die SPI Schnittstelle statt: Pin 19 (SPI0 MOSI), Pin 21 (SPI0 CLK) und Pin 24 (SPI0 CE0). Ausserdem befindet sich auf der Steuer-Leiterplatte der DC/DC Wandler TEM 3-1211N. Er wandelt die externe Speisungsspannung von 12V auf 5V um. Diese wird für das Raspberry PI und die TTL Logik Bausteine auf den Digit-Leiterplatten gebraucht.
 
 ![Steuer](images/steuer.jpg "Steuer Leiterplatte")
-![Steuer-Schema](images/steuer-schema.png "Steuer Leiterplatte Schema")
-![Steuer](hardware/SteuerLeiterplatte.vsd "Steuer Leiterplatte")
+![Steuer Schema](images/steuer-schema.png "Steuer Leiterplatte Schema")
+![Steuer Leiterplatte Zeichnungen](hardware/SteuerLeiterplatte.vsd "Steuer Leiterplatte")
 
 ### Digit-Leiterplatte
 
@@ -38,33 +38,33 @@ Jedes einzelne Digit sitzt auf einer eigenen Leiterplatte. Alle Digit-Leiterplat
 
 Die einzelnen LED eines Segments sind in Serie geschaltet und direkt mit der 12 V Speisungsspannung verbunden. Jedes Segment wird über einen Inverter Buffer mit Open Kollektor Baustein (SN74LS06) angesteuert. Ist der Ausgang hochohmig so ist das Segment ausgeschaltet. Wird das Ausgang auf Ground gezogen so ist das Segment eingeschaltet. Ein AND Baustein verknüpft die Digit- und Segment-Steuersignale vom 7 Segment Steuer-Baustein miteinander. Die Digitposition wird mittels Lötbrücke auf der Leiterplatte konfiguriert. 
 
-![Digit](images/digit.jgp "Digit Leiterplatte")
+![Digit Leiterplatte](images/digit.jpg "Digit Leiterplatte")
 
 Die Digit-Leiterplatte wurden mit der Software Target 3001 entworfen und gelayoutet. Sie wurden von einem professionellen Anbieter hergestellt.  
 
-![Digit](image/digit-schema.png "Digit Leiterplatte Schema")
-![Digit](image/digit-layout.png "Digit Leiterplatte Layout")
-![Digit](hardware/DigitLeiterplatte.T3000 "Target 3001 Datei")   
+![Digit Schema](images/digit-schema.png "Digit Leiterplatte Schema")
+![Digit Layout](images/digit-layout.png "Digit Leiterplatte Layout")
+![Digit Leiterplatte T3000](hardware/DigitLeiterplatte.T3000 "Target 3001 Datei")   
 
 ### Gehäuse
 
 Das Gehäuse besteht aus einem Leiterplattenträger aus Holz. Auf diesem werden die Digit-Leiterplatten vorne und die Steuer-Leiterplatten hinten montiert.
 
-![Gehäuse](image/gehaeuse-lp-traeger.png "Gehäuse Leiterplatten Träger") 
+![Gehäuse Leiterplatten Träger](images/gehaeuse-lp-traeger.png "Gehäuse Leiterplatten Träger") 
 
 Seitlich werden die Seitenwände, welche aus Aluminium hergestellt sind montiert.
 
-![Gehäuse](image/gehaeuse-seitenwand.png "Gehäuse Seitenwand")
+![Gehäuse Seitenwand](images/gehaeuse-seitenwand.png "Gehäuse Seitenwand")
 
 Die Aussenwand, in welche man den Leiterplattenträger inklusive Leiterplatten und Seitenwände hineinschieben kann, ist aus Aluminium gefertigt und entsprechend in Form gebogen.
  
-![Gehäuse](image/gehaeuse-aussen.png "Gehäuse Aussenwand")
+![Gehäuse Aussenwand](image/gehaeuse-aussen.png "Gehäuse Aussenwand")
 
 Zusammengesetzt sieht das ganze dann wie folgt aus:
 
 ![Gehäuse](image/gehaeuse.png "Gehäuse")
-![Gehäuse](image/gehaeuse-seitenansicht.png "Gehäuse Seitenansicht")
-![Gehäuse](hardware/Gehaeuse.vsd "Gehäuse")
+![Gehäuse Seitenansicht](image/gehaeuse-seitenansicht.png "Gehäuse Seitenansicht")
+![Gehäuse Zeichnungen](hardware/Gehaeuse.vsd "Gehäuse")
 
 
 ## Software
