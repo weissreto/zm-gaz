@@ -1,0 +1,22 @@
+Verbinden mit dem Raspberry PI auf der ZM GAZ:
+
+1. Installiere und starte einen Hotspot auf dem ZM Laptop:
+
+> netsh wlan set hostednetwork mode=allow ssid=ZMPC key=ZeitMessTeam
+> netsh wlan start hostednetwork
+
+2. Finde die IP Adresse der ZM GAZ:
+
+Die Subnetzwerkmaske des hostednetwork is 192.168.137.*
+
+> arp -a
+
+3. Starte VNC Viewer und verbinde mit ZM GAZ
+
+IP: 192.168.137.*
+User: pi
+Password: ZeitMessTeam
+
+4. Stoppe Hotspot
+
+> netsh wlan stop hostednetwork
