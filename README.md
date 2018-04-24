@@ -30,6 +30,7 @@ Die Steuer-Leiterplatten besteht aus einem Laborprint auf welchem ein Raspberry 
 
 ![Steuer](images/steuer.jpg "Steuer Leiterplatte")
 ![Steuer Schema](images/steuer-schema.png "Steuer Leiterplatte Schema")
+
 ![Steuer Leiterplatte Zeichnungen](hardware/SteuerLeiterplatte.vsd "Steuer Leiterplatte")
 
 ### Digit-Leiterplatte
@@ -44,6 +45,7 @@ Die Digit-Leiterplatte wurden mit der Software Target 3001 entworfen und gelayou
 
 ![Digit Schema](images/digit-schema.png "Digit Leiterplatte Schema")
 ![Digit Layout](images/digit-layout.png "Digit Leiterplatte Layout")
+
 ![Digit Leiterplatte T3000](hardware/DigitLeiterplatte.T3000 "Target 3001 Datei")   
 
 ### Gehäuse
@@ -58,12 +60,13 @@ Seitlich werden die Seitenwände, welche aus Aluminium hergestellt sind montiert
 
 Die Aussenwand, in welche man den Leiterplattenträger inklusive Leiterplatten und Seitenwände hineinschieben kann, ist aus Aluminium gefertigt und entsprechend in Form gebogen.
  
-![Gehäuse Aussenwand](image/gehaeuse-aussen.png "Gehäuse Aussenwand")
+![Gehäuse Aussenwand](images/gehaeuse-aussen.png "Gehäuse Aussenwand")
 
 Zusammengesetzt sieht das ganze dann wie folgt aus:
 
-![Gehäuse](image/gehaeuse.png "Gehäuse")
-![Gehäuse Seitenansicht](image/gehaeuse-seitenansicht.png "Gehäuse Seitenansicht")
+![Gehäuse](images/gehaeuse.png "Gehäuse")
+![Gehäuse Seitenansicht](images/gehaeuse-seitenansicht.png "Gehäuse Seitenansicht")
+
 ![Gehäuse Zeichnungen](hardware/Gehaeuse.vsd "Gehäuse")
 
 
