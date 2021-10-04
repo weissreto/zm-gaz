@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Format
  * Character Position   0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 
- * 					    1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4
+ *                      1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4
  * Timer S3             s s s K K       H H : M M : S S . Z h T     N 
  * Alge Optic                 K         H H : M M : S S . Z h T       N 
  *
