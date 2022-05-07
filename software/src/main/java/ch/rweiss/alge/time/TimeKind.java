@@ -15,7 +15,7 @@ public enum TimeKind
 	/** Running time */
 	RUNNING (
 	    "LZ",  // TimerS3 
-	    "."    // Optic
+	    "."    // Optic, Optic3
 	    );
 
 	private String[] shortcuts;

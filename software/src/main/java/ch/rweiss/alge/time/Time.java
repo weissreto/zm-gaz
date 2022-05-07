@@ -7,9 +7,14 @@ import org.apache.commons.lang3.StringUtils;
  * Character Position   0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 
  *                      1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4
  * Timer S3             s s s K K       H H : M M : S S . Z h T     N 
- * Alge Optic                 K         H H : M M : S S . Z h T       N 
+ * Alge Optic                 K         H H : M M : S S . Z h T       N
+ * Alge Optic3          s s s K         H H : M M : S S . Z h T       N
  *
- * K: Time Kind. TimerS3: "SZ", "MS", "ZZ", "ZW", "LZ", " ". Alge Optic: " ",".", "C".
+ * s: Run Number 
+ * K: Time Kind. 
+ *    TimerS3:     "SZ", "MS", "ZZ", "ZW", "LZ", " ". 
+ *    Alge Optic:  " ",".", "C".
+ *    Alge Optic3: " ", ".", "C"
  * H: Hour
  * M: Minutes
  * S: Seconds
@@ -20,8 +25,6 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Time 
 {
-	private static final String MILLI_DELIMITER = ".";
-	private static final String DELIMITER = ":";
 	private int hours;
 	private int minutes;
 	private int seconds;
@@ -84,78 +87,50 @@ public class Time
 
 	private void parse() 
 	{
-		String timeString = time;
-		timeString = parseTimeKind(timeString);
-		timeString = parseHours(timeString);
-		timeString = parseMinutes(timeString);
-		timeString = parseSeconds(timeString);
-		parseMilliSeconds(timeString);
+		parseTimeKind();
+		parseHours();
+		parseMinutes();
+		parseSeconds();
+		parseMilliSeconds();
 	}
 
-	private String parseTimeKind(String timeString) 
+	private void parseTimeKind() 
 	{
-	  String timeKind = StringUtils.substring(timeString, 0, 5);
+	  String timeKind = part(3, 5);
 		kind = TimeKind.parse(timeKind);
-		timeString = StringUtils.substring(timeString, 5);
-		return timeString.trim();
 	}
 
-	private String parseHours(String timeString) 
+  private void parseHours() 
 	{
-		if (StringUtils.countMatches(timeString, DELIMITER)==2)
-		{
-			hours = parseInt(timeString, DELIMITER);
-			timeString = StringUtils.substringAfter(timeString, DELIMITER);
-		}
-		else
-		{
-			hours = 0;
-		}
-		return timeString;
+		hours = parseDigits(8, 10);
 	}
 	
-	private String parseMinutes(String timeString)
+	private void parseMinutes()
 	{
-		minutes = parseInt(timeString, DELIMITER);
-		timeString = StringUtils.substringAfter(timeString,  DELIMITER);
-		return timeString;
+		minutes = parseDigits(11, 13);
 	}
 	
-	private String parseSeconds(String timeString) 
+	private void parseSeconds() 
 	{
-		if (StringUtils.contains(timeString, MILLI_DELIMITER))
-		{
-			seconds = parseInt(timeString, MILLI_DELIMITER);
-			timeString = StringUtils.substringAfter(timeString, MILLI_DELIMITER);
-		}
-		else if (StringUtils.isBlank(timeString))
-		{
-			seconds = 0;			
-			timeString="";
-		}
-		else
-		{
-			seconds = Integer.parseInt(timeString);
-			timeString = "";
-		}
-		return timeString;
+	  seconds = parseDigits(14, 16);
 	}
 	
-	private void parseMilliSeconds(String timeString)
+	private void parseMilliSeconds()
 	{
-		if (timeString.isEmpty())
+	  String millis = part(17, 20);
+		if (millis.isEmpty())
 		{
 			precision = TimePrecision.SECOND;
 			milliseconds = 0;
 			return;
 		}
-		milliseconds = Integer.parseInt(timeString);
-		if (timeString.length()==1)
+		milliseconds = Integer.parseInt(millis);
+		if (millis.length()==1)
 		{
 			precision = TimePrecision.TENTH;
 			milliseconds = milliseconds*100;
 		}
-		else if (timeString.length() == 2)
+		else if (millis.length() == 2)
 		{
 			precision = TimePrecision.HUNDREDTH;
 			milliseconds = milliseconds*10;
@@ -166,13 +141,28 @@ public class Time
 		}
 	}
 
-	private static int parseInt(String str, String delimiter)
+	private int parseDigits(int start, int end)
 	{
-		return Integer.parseInt(StringUtils.substringBefore(str,  delimiter));
+	  String digits = part(start, end);
+    if (StringUtils.isBlank(digits)) 
+    {
+      return 0;
+    }
+		return Integer.parseInt(digits);
+	}
+	
+	private String part(int start, int end)
+  {
+	  return StringUtils.substring(time, start, end).trim();
 	}
 
 	public boolean isNull() 
 	{		
 		return hours==0 && minutes==0 && seconds == 0 && milliseconds == 0 && precision == TimePrecision.HUNDREDTH;
 	}
+
+  public boolean isBlank()
+  {
+    return StringUtils.isBlank(time);
+  }
 }
