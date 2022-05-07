@@ -2,6 +2,7 @@
 
 Selbstgebaute Grossanzeige für ALGE Zeitmessungen. 
 Die Grossanzeige kann über RS-232 mit den folgenden ALGE Zeitmessungen betrieben werden:
+* ALGE OPTIc3 
 * ALGE OPTIc 
 * ALGE Timer VT2
 * ALGE Timer S3 
