@@ -3,7 +3,6 @@ package ch.rweiss.alge;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,7 +33,6 @@ public class TimerS3
     {
       String line = readNextLine();
       LOGGER.debug("Received line: %s", line);
-      line = removeLeadingRaceNumber(line);
       try
       {
         Time time = Time.parse(line);
@@ -45,11 +43,6 @@ public class TimerS3
         LOGGER.error("Could not parse line '"+line+"'", ex);
       }
     }
-  }
-
-  private static String removeLeadingRaceNumber(String line)
-  {
-    return StringUtils.substring(line, 3);
   }
 
   private String readNextLine()

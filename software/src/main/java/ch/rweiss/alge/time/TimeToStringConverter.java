@@ -72,6 +72,7 @@ public class TimeToStringConverter
       }
       if (onlyBlanks)
       {
+        builder.append(" ");
         formatter.format("%2d", time.getSeconds());
       }
       else
@@ -81,7 +82,7 @@ public class TimeToStringConverter
       }
       if (time.getPrecision() == TimePrecision.SECOND)
       {
-        builder.append("  ");
+        builder.append("   ");
       }
       else
       {
